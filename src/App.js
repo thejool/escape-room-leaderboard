@@ -1,24 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
+import Countdown from 'react-countdown';
+import Leaderboard from './Leaderboard';
 
-function App() {
+const App = () => {
+  const challenges = [
+    'Snake',
+    'Fizz Buzz',
+    'Swagger',
+    'Paint',
+    'QR KOD',
+    'Blue Screen',
+  ]
+
+  const Finished = () => (
+    <div className="overlay">
+      <div className="gameover">
+        <h1>Game over!!</h1>
+      </div>
+    </div>
+  )
+
+  const renderer = ({ minutes, seconds, completed }) => {
+    let secs = seconds > 9 ? seconds : '0' + seconds
+    let mins = minutes > 9 ? minutes : '0' + minutes
+
+    if (completed) {
+      // Render a completed state
+      return <Finished />;
+    } else {
+      // Render a countdown
+      return <span className="countdown">{mins}:{secs}</span>;
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <div className="leaderboard">
+        <div className="leaderboard-title">
+          <h1>Leaderboard</h1>
+
+          <Countdown
+            date={Date.now() + 3600000}
+            renderer={renderer}
+          />
+        </div>
+        
+        <Leaderboard challenges={challenges} />
+      </div>
     </div>
   );
 }
