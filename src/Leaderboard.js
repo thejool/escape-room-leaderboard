@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import useInterval from './useInterval'
 
-const Leaderboard = ({challenges}) => {
+const Leaderboard = ({ challenges, setWinner }) => {
   const [leaderboard, setLeaderboard] = useState([])
   const fetchLeaderboard = useCallback(() => {
     fetch('https://ksjb83hyh7.execute-api.eu-west-1.amazonaws.com/knowit/competitions/')
@@ -32,13 +32,21 @@ const Leaderboard = ({challenges}) => {
     }
   }, [fetchLeaderboard, leaderboard])
 
-  useEffect(() => {
-    console.log(leaderboard)
-  }, [leaderboard])
-
   useInterval(() => {
     fetchLeaderboard()
   }, 5000);
+
+
+  useInterval(() => {
+    leaderboard.map(({
+      name,
+      scores,
+    }) => {
+      if(scores.length === challenges.length) {
+        setWinner(name)
+      }
+    }
+  }, [leaderboard]);
 
   return (
     <div>
