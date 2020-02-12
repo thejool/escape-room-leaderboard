@@ -54,3 +54,44 @@
 .countdown {
   font-size: 60px;
 }
+
+
+
+.finished-screen {
+  z-index: 2;
+  background: #000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.finished-screen img {
+  width: 100%;
+}
+
+.congratz-close {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.congratz {
+  position: absolute;
+  color: #ffffff;
+  text-align: center;
+
+}
+
+.congratz a {
+  display: block;
+  margin-top: 10px;
+  color: #ffffff;
+}

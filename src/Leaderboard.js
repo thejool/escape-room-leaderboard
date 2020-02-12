@@ -37,7 +37,7 @@ const Leaderboard = ({ challenges, setWinner }) => {
   }, 5000);
 
 
-  useInterval(() => {
+  useEffect(() => {
     leaderboard.map(({
       name,
       scores,
@@ -45,8 +45,8 @@ const Leaderboard = ({ challenges, setWinner }) => {
       if(scores.length === challenges.length) {
         setWinner(name)
       }
-    }
-  }, [leaderboard]);
+    })
+  }, [challenges.length, leaderboard, setWinner]);
 
   return (
     <div>
@@ -54,7 +54,7 @@ const Leaderboard = ({ challenges, setWinner }) => {
         name,
         scores,
       }) => (
-        <div className="leaderboard-score">
+        <div className="leaderboard-score" key={name}>
           <div className="leaderboard-score__name">
             {name}
           </div>

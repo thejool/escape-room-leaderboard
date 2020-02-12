@@ -2,8 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Countdown from 'react-countdown';
 import Leaderboard from './Leaderboard';
+import WinnerScreen from './WinnerScreen'
 
+const startTime = new Date()
 const App = () => {
+  const [winner, setWinner] = useState()
+  const [hideWinnerScreen, setHideWinnerScreen] = useState(false)
   const challenges = [
     'Snake',
     'Fizz Buzz',
@@ -11,6 +15,8 @@ const App = () => {
     'Paint',
     'QR KOD',
     'Blue Screen',
+    'Question',
+    'Tower',
   ]
 
   const Finished = () => (
@@ -34,6 +40,10 @@ const App = () => {
     }
   };
 
+  if(winner && !hideWinnerScreen) {
+    return <WinnerScreen onClick={() => setHideWinnerScreen(true)} teamName={winner} startTime={startTime} />
+  }
+
   return (
     <div className="App">
 
@@ -42,12 +52,12 @@ const App = () => {
           <h1>Leaderboard</h1>
 
           <Countdown
-            date={Date.now() + 3600000}
+            date={startTime.getTime() + 3600000}
             renderer={renderer}
           />
         </div>
         
-        <Leaderboard challenges={challenges} />
+        <Leaderboard setWinner={setWinner} challenges={challenges} />
       </div>
     </div>
   );
