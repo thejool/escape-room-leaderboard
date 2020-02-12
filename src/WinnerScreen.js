@@ -26,7 +26,7 @@ const FinishedScreen = ({onClick, teamName, startTime}) => {
         <h1>Congratulations {teamName}</h1>
         <div>Good job! You escaped in {differenceInTime(startTime, currentTime)}!</div>
         <a href="https://www.knowit.se/karriar/trainee" target="_blank">
-          Apply to our traineprogram here
+          https://www.knowit.se/karriar/trainee
         </a>
       </div>
       <img src={celebrate} alt="Fireworks" />
